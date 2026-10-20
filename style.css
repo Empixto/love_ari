@@ -1,0 +1,274 @@
+
+/* ==============================
+   CONFIGURACIÓN GENERAL
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+    overflow: hidden;
+}
+
+.pantalla {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+/* ==============================
+   PRIMERA PANTALLA
+============================== */
+
+#pantalla-pregunta {
+    background: #ffe0e9;
+    padding: 20px;
+}
+
+.tarjeta {
+    width: min(100%, 380px);
+    min-height: 430px;
+    background: #fffafa;
+    border-radius: 28px;
+    padding: 35px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    box-shadow: 0 12px 35px rgba(222, 91, 128, 0.15);
+    text-align: center;
+}
+
+.tarjeta h1 {
+    color: #e75480;
+    font-size: clamp(27px, 6vw, 36px);
+    line-height: 1.2;
+}
+
+.personaje {
+    font-size: 100px;
+    line-height: 1.2;
+    animation: respirar 2s ease-in-out infinite;
+}
+
+/* ==============================
+   CONTENEDOR DE GIFS
+============================== */
+
+.contenedor-gif {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    overflow: hidden;
+    animation: respirar 2.5s ease-in-out infinite;
+    background: transparent; /* Fondo transparente por si el GIF tiene espacios libres */
+}
+
+.gif-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Cambiado de cover a contain para que no se recorte */
+    border-radius: 20px;
+}
+
+/* ==============================
+   SECCIÓN DE BOTONES CORREGIDA
+============================== */
+
+.botones {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-height: 80px;
+    flex-wrap: wrap; /* Permite que se acomoden si el espacio vertical o de tarjeta es amplio */
+    position: relative;
+}
+
+.boton {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 25px;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    /* Usamos transform-origin center para un crecimiento uniforme */
+    transform-origin: center center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+.boton-si {
+    background: #39bd68;
+    min-width: 100px;
+    min-height: 48px;
+    z-index: 1; /* Mantiene un nivel neutro */
+}
+
+.boton-no {
+    background: #f05252;
+    min-height: 48px;
+    z-index: 1;
+}
+
+.boton:hover {
+    filter: brightness(1.05);
+}
+
+/* ==============================
+   SEGUNDA PANTALLA
+============================== */
+
+.pantalla-final {
+    background: linear-gradient(
+        135deg,
+        #ffd6e4,
+        #ffeaf0,
+        #ffc5da
+    );
+    padding: 20px;
+}
+
+.mensaje-final {
+    width: min(100%, 400px);
+    min-height: 400px;
+    padding: 35px 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 28px;
+    box-shadow: 0 10px 35px rgba(222, 91, 128, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: aparecer 0.8s ease;
+}
+
+.mensaje-final h1 {
+    color: #e75480;
+    font-size: clamp(30px, 7vw, 42px);
+}
+
+.personaje-final {
+    font-size: 105px;
+    animation: respirar 2s ease-in-out infinite;
+}
+
+.mensaje-final p {
+    color: #bd416d;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+/* ==============================
+   CORAZONES FLOTANTES
+============================== */
+
+.corazones {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.corazon {
+    position: absolute;
+    bottom: -60px;
+    color: #ff5d91;
+    opacity: 0.75;
+    animation: flotar linear forwards;
+}
+
+/* ==============================
+   ANIMACIONES
+============================== */
+
+@keyframes respirar {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes flotar {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ==============================
+   ADAPTACIÓN A MÓVILES
+============================== */
+
+@media (max-width: 480px) {
+    .tarjeta {
+        min-height: 400px;
+        padding: 28px 18px;
+        gap: 24px;
+    }
+
+    .personaje {
+        font-size: 85px;
+    }
+
+    .boton {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .mensaje-final {
+        min-height: 360px;
+    }
+}
